@@ -1,0 +1,24 @@
+{
+  "appId":   "com.japanesevocab.app",
+  "appName": "Japanese Vocab",
+  "webDir":  "dist",
+
+  "server": {
+    "androidScheme": "https"
+  },
+
+  "android": {
+    "allowMixedContent": true,
+    "backgroundColor":   "#fef3e2"
+  },
+
+  "plugins": {
+    "SplashScreen": {
+      "launchShowDuration":  2000,
+      "backgroundColor":     "#fef3e2",
+      "androidSplashResourceName": "splash",
+      "showSpinner":         false,
+      "launchFadeOutDuration": 500
+    }
+  }
+}
