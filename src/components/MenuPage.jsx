@@ -1,6 +1,7 @@
 /**
  * MenuPage
  * The home screen. Shows:
+ *   - Back to lessons button (only when multiple lessons exist)
  *   - Lesson info (title, word count, page)
  *   - Category filter
  *   - Romaji toggle
@@ -17,6 +18,7 @@ export default function MenuPage({
   onBrowse,
   onFlashcards,
   onQuiz,
+  onHome,          // optional — only passed when >1 lesson exists
 }) {
   const categories = ["All", ...Object.keys(lesson.vocab)];
 
@@ -29,8 +31,28 @@ export default function MenuPage({
     }}>
       <div style={{ maxWidth: 600, margin: "0 auto" }}>
 
+        {/* ── Back to Lesson Selector ── */}
+        {onHome && (
+          <div style={{ marginBottom: 8, paddingTop: 8 }}>
+            <button onClick={onHome}
+              style={{
+                display: "inline-flex", alignItems: "center", gap: 6,
+                background: "transparent",
+                border: "2px solid #e8cdb8",
+                borderRadius: 10, padding: "7px 16px",
+                cursor: "pointer", fontFamily: "Georgia, serif",
+                fontSize: 13, color: "#7a4a2a",
+                transition: "all 0.2s",
+              }}
+              onMouseEnter={e => { e.currentTarget.style.borderColor = "#b5341a"; e.currentTarget.style.color = "#b5341a"; }}
+              onMouseLeave={e => { e.currentTarget.style.borderColor = "#e8cdb8"; e.currentTarget.style.color = "#7a4a2a"; }}>
+              🏠 All Lessons
+            </button>
+          </div>
+        )}
+
         {/* ── Header ── */}
-        <div style={{ textAlign: "center", paddingTop: 30, paddingBottom: 20 }}>
+        <div style={{ textAlign: "center", paddingTop: onHome ? 10 : 30, paddingBottom: 20 }}>
           <div style={{ fontSize: 48, marginBottom: 4 }}>{lesson.emoji}</div>
           <h1 style={{ fontSize: 36, fontWeight: "bold", color: "#b5341a", margin: 0, letterSpacing: 2 }}>
             {lesson.title}

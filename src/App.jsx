@@ -71,6 +71,7 @@ export default function App() {
         onBrowse={()      => setScreen("browse")}
         onFlashcards={()  => setScreen("flashcard")}
         onQuiz={()        => setScreen("quiz")}
+        onHome={lessons.length > 1 ? () => setScreen("lessonSelect") : null}
       />
     );
   }

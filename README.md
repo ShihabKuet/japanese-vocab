@@ -1,6 +1,7 @@
 # 🇯🇵 Japanese Vocabulary App
 
-A scalable React app for learning Japanese vocabulary — with audio, example sentences, flashcards, and quizzes.
+A scalable React app for learning Japanese vocabulary — audio pronunciation,
+example sentences, Wikipedia images, flashcards, and quizzes.
 
 ---
 
@@ -9,24 +10,25 @@ A scalable React app for learning Japanese vocabulary — with audio, example se
 ```
 src/
 ├── components/
-│   ├── WordCard.jsx          ← Word card: audio + example sentence
+│   ├── WordCard.jsx          ← Word card (audio + example sentence)
 │   ├── BrowsePage.jsx        ← Browse all words by category
-│   ├── FlashcardPage.jsx     ← Flip-card memorisation mode
+│   ├── FlashcardPage.jsx     ← Flip-card mode with Wikipedia images
 │   ├── QuizPage.jsx          ← Multiple-choice quiz
-│   ├── MenuPage.jsx          ← Lesson home screen
-│   └── LessonSelector.jsx    ← Pick a lesson (shown if >1 lesson)
+│   ├── MenuPage.jsx          ← Per-lesson home screen
+│   └── LessonSelector.jsx    ← Lesson picker (auto-shown if >1 lesson)
 │
 ├── data/
-│   ├── lesson1_food.js       ← 食べ物 Food (Page 43)
-│   └── index.js              ← Register lessons here
+│   ├── lesson1_food.js               ✅ 食べ物   Food          (Page 43)
+│   ├── lesson2_department_store.js   ✅ デパート  Dept. Store   (Page 25)
+│   └── index.js              ← Register ALL lessons here
 │
 ├── utils/
 │   ├── shuffle.js            ← shuffle() helper
-│   └── speech.js             ← speak() Japanese TTS helper
+│   └── speech.js             ← speak() Japanese TTS
 │
-├── App.jsx                   ← Screen router (clean, ~60 lines)
-├── main.jsx                  ← React entry point
-└── index.css                 ← Full-screen reset
+├── App.jsx                   ← Screen router (~60 lines)
+├── main.jsx
+└── index.css
 ```
 
 ---
@@ -34,82 +36,103 @@ src/
 ## 🚀 Setup (First Time)
 
 ```bash
-# 1. Create a new Vite + React project
 npm create vite@latest japanese-vocab -- --template react
 cd japanese-vocab
-
-# 2. Install dependencies
 npm install
-
-# 3. Delete the default src/ folder contents
-# (delete App.jsx, App.css, index.css, main.jsx, assets/)
-
-# 4. Copy all files from this refactored project into src/
-#    matching the folder structure above
-
-# 5. Run the app
+# Delete everything in src/, then copy all files from this zip into src/
 npm run dev
 ```
 
-Open **http://localhost:5173** in your browser.
+Open **http://localhost:5173**
 
 ---
 
-## ➕ How to Add a New Lesson
+## ➕ Adding a New Lesson (2 steps only)
 
-### Step 1 — Create the data file
+### Step 1 — Create `src/data/lesson3_yourTopic.js`
 
-Copy `src/data/lesson1_food.js` and rename it, e.g. `lesson2_numbers.js`.
+Copy `lesson1_food.js` as a template and fill in:
 
-Edit the fields at the top:
 ```js
-const lesson2 = {
-  id:      "lesson2_numbers",
-  title:   "数字",
-  titleEn: "Numbers",
-  emoji:   "🔢",
-  page:    12,
+const lesson3 = {
+  id:      "lesson3_greetings",   // unique, no spaces
+  title:   "あいさつ",             // Japanese title
+  titleEn: "Greetings",           // English title
+  emoji:   "👋",                  // one emoji
+  page:    8,                     // textbook page
 
   vocab: {
-    "🔢 数字 Numbers": [
+    "👋 あいさつ Basic Greetings": [
       {
-        jp:         "いち",
-        en:         "one",
-        romaji:     "ichi",
-        sentence:   "りんごがいちこあります。",
-        sentenceEn: "There is one apple.",
+        jp:         "おはよう",
+        en:         "Good Morning",
+        romaji:     "ohayou",
+        wikiTitle:  "Morning",           // Wikipedia article for image
+        sentence:   "おはようございます。",
+        sentenceEn: "Good morning (polite).",
       },
       // ... more words
     ],
   },
 };
 
-export default lesson2;
+export default lesson3;
 ```
 
 ### Step 2 — Register it in `src/data/index.js`
 
 ```js
 import lesson1 from "./lesson1_food";
-import lesson2 from "./lesson2_numbers";   // ← add this
+import lesson2 from "./lesson2_department_store";
+import lesson3 from "./lesson3_greetings";   // ← add import
 
 export const lessons = [
   lesson1,
-  lesson2,   // ← add this
+  lesson2,
+  lesson3,    // ← add here
 ];
 ```
 
-That's it! The app will automatically show a **Lesson Selector** screen when more than one lesson exists. All Browse / Flashcard / Quiz features work instantly with the new data.
+Done! The Lesson Selector and all study modes work automatically.
 
 ---
 
-## 🛑 Stopping the Server
+## 🌐 Deployment (Free)
 
-Press `Ctrl + C` in the terminal.
+### Vercel (recommended — auto-deploys on every git push)
+1. Push project to GitHub
+2. Go to vercel.com → New Project → select repo → Deploy
+3. Get a live URL instantly
 
-## ▶️ Starting Again Later
+### GitHub Pages
+```bash
+npm install --save-dev gh-pages
+# Add to vite.config.js:  base: '/japanese-vocab/'
+# Add to package.json scripts:
+#   "predeploy": "npm run build"
+#   "deploy": "gh-pages -d dist"
+npm run deploy
+```
+
+---
+
+## ✅ Lessons Checklist
+
+| # | File | Title | Page | Words |
+|---|------|-------|------|-------|
+| 1 | lesson1_food.js | 食べ物 Food | 43 | 39 |
+| 2 | lesson2_department_store.js | デパート Dept. Store | 25 | 24 |
+| 3 | lesson3_???.js | — | — | — |
+| 4 | lesson4_???.js | — | — | — |
+
+---
+
+## ▶️ Run Locally
 
 ```bash
 cd japanese-vocab
 npm run dev
+# Open http://localhost:5173
 ```
+
+Stop: `Ctrl + C`
