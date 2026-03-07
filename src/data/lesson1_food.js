@@ -1,0 +1,117 @@
+/**
+ * LESSON 1 — 食べ物 (Food)
+ * Source: Textbook Page 43
+ *
+ * `wikiTitle` is the English Wikipedia article title used to
+ * fetch a real photo via the Wikipedia REST API (no key needed).
+ */
+const lesson1 = {
+  id:      "lesson1_food",
+  title:   "食べ物",
+  titleEn: "Food",
+  emoji:   "🍱",
+  page:    43,
+
+  vocab: {
+    "🥬 野菜 Vegetables": [
+      { jp: "きゅうり",     en: "Cucumber",               romaji: "kyuuri",    wikiTitle: "Cucumber",
+        sentence: "きゅうりはみずみずしいです。",           sentenceEn: "Cucumbers are juicy and refreshing." },
+      { jp: "トマト",       en: "Tomato",                  romaji: "tomato",    wikiTitle: "Tomato",
+        sentence: "このトマトはとても赤いです。",           sentenceEn: "This tomato is very red." },
+      { jp: "なす",         en: "Eggplant",                romaji: "nasu",      wikiTitle: "Eggplant",
+        sentence: "なすを油で炒めました。",                sentenceEn: "I stir-fried the eggplant in oil." },
+      { jp: "まめ",         en: "Beans / Peas",            romaji: "mame",      wikiTitle: "Pea",
+        sentence: "まめはたんぱく質が豊富です。",           sentenceEn: "Beans are rich in protein." },
+      { jp: "キャベツ",     en: "Cabbage",                 romaji: "kyabetsu",  wikiTitle: "Cabbage",
+        sentence: "キャベツのサラダを作りました。",         sentenceEn: "I made a cabbage salad." },
+      { jp: "ねぎ",         en: "Spring Onion",            romaji: "negi",      wikiTitle: "Scallion",
+        sentence: "スープにねぎを入れてください。",         sentenceEn: "Please add spring onion to the soup." },
+      { jp: "はくさい",     en: "Chinese Cabbage",         romaji: "hakusai",   wikiTitle: "Napa cabbage",
+        sentence: "はくさいは鍋料理によく使います。",       sentenceEn: "Chinese cabbage is often used in hot pot." },
+      { jp: "ほうれんそう", en: "Spinach",                 romaji: "hourensou", wikiTitle: "Spinach",
+        sentence: "ほうれんそうには鉄分が多いです。",       sentenceEn: "Spinach contains a lot of iron." },
+      { jp: "レタス",       en: "Lettuce",                 romaji: "retasu",    wikiTitle: "Lettuce",
+        sentence: "レタスをサンドウィッチに入れます。",     sentenceEn: "I put lettuce in the sandwich." },
+      { jp: "じゃがいも",   en: "Potato",                  romaji: "jagaimo",   wikiTitle: "Potato",
+        sentence: "じゃがいもでカレーを作ります。",         sentenceEn: "I make curry with potatoes." },
+      { jp: "だいこん",     en: "Daikon Radish",           romaji: "daikon",    wikiTitle: "Daikon",
+        sentence: "だいこんは冬においしいです。",           sentenceEn: "Japanese radish is delicious in winter." },
+      { jp: "たまねぎ",     en: "Onion",                   romaji: "tamanegi",  wikiTitle: "Onion",
+        sentence: "たまねぎを切ると目が痛いです。",         sentenceEn: "My eyes hurt when I cut onions." },
+      { jp: "にんじん",     en: "Carrot",                  romaji: "ninjin",    wikiTitle: "Carrot",
+        sentence: "にんじんはビタミンが豊富です。",         sentenceEn: "Carrots are rich in vitamins." },
+    ],
+
+    "🍎 果物 Fruits": [
+      { jp: "いちご",  en: "Strawberry",      romaji: "ichigo",  wikiTitle: "Strawberry",
+        sentence: "いちごにクリームをかけて食べます。",       sentenceEn: "I eat strawberries with cream." },
+      { jp: "もも",    en: "Peach",           romaji: "momo",    wikiTitle: "Peach",
+        sentence: "このももはとても甘いです。",               sentenceEn: "This peach is very sweet." },
+      { jp: "すいか",  en: "Watermelon",      romaji: "suika",   wikiTitle: "Watermelon",
+        sentence: "夏にすいかを食べるのが好きです。",         sentenceEn: "I love eating watermelon in summer." },
+      { jp: "ぶどう",  en: "Grape",           romaji: "budou",   wikiTitle: "Grape",
+        sentence: "ぶどうからワインを作ります。",             sentenceEn: "Wine is made from grapes." },
+      { jp: "なし",    en: "Japanese Pear",   romaji: "nashi",   wikiTitle: "Asian pear",
+        sentence: "なしはシャキシャキしています。",           sentenceEn: "Japanese pears are crispy." },
+      { jp: "かき",    en: "Persimmon",       romaji: "kaki",    wikiTitle: "Persimmon",
+        sentence: "かきは秋の果物です。",                    sentenceEn: "Persimmon is an autumn fruit." },
+      { jp: "みかん",  en: "Mandarin Orange", romaji: "mikan",   wikiTitle: "Mandarin orange",
+        sentence: "冬にこたつでみかんを食べます。",           sentenceEn: "I eat mandarin oranges under the kotatsu in winter." },
+      { jp: "りんご",  en: "Apple",           romaji: "ringo",   wikiTitle: "Apple",
+        sentence: "毎日りんごを一個食べます。",               sentenceEn: "I eat one apple every day." },
+      { jp: "バナナ",  en: "Banana",          romaji: "banana",  wikiTitle: "Banana",
+        sentence: "バナナはエネルギーになります。",           sentenceEn: "Bananas give you energy." },
+    ],
+
+    "🥩 肉 Meat": [
+      { jp: "ぎゅうにく", en: "Beef",    romaji: "gyuuniku", wikiTitle: "Beef",
+        sentence: "ぎゅうにくでステーキを作りました。",   sentenceEn: "I made a steak with beef." },
+      { jp: "とりにく",   en: "Chicken", romaji: "toriniku", wikiTitle: "Chicken as food",
+        sentence: "とりにくは低カロリーです。",           sentenceEn: "Chicken is low in calories." },
+      { jp: "ぶたにく",   en: "Pork",    romaji: "butaniku", wikiTitle: "Pork",
+        sentence: "ぶたにくの生姜焼きが好きです。",       sentenceEn: "I like ginger-fried pork." },
+      { jp: "ソーセージ", en: "Sausage", romaji: "sooseeji", wikiTitle: "Sausage",
+        sentence: "朝ごはんにソーセージを食べます。",     sentenceEn: "I eat sausage for breakfast." },
+      { jp: "ハム",       en: "Ham",     romaji: "hamu",     wikiTitle: "Ham",
+        sentence: "ハムとチーズのサンドウィッチです。",   sentenceEn: "It is a ham and cheese sandwich." },
+    ],
+
+    "🐟 魚 Fish & Seafood": [
+      { jp: "あじ",  en: "Horse Mackerel",   romaji: "aji",    wikiTitle: "Atlantic horse mackerel",
+        sentence: "あじの塩焼きは美味しいです。",         sentenceEn: "Salt-grilled horse mackerel is delicious." },
+      { jp: "いわし",en: "Sardine",           romaji: "iwashi", wikiTitle: "Sardine",
+        sentence: "いわしはカルシウムが多いです。",       sentenceEn: "Sardines contain a lot of calcium." },
+      { jp: "さば",  en: "Mackerel",          romaji: "saba",   wikiTitle: "Atlantic mackerel",
+        sentence: "さばの味噌煮が好きです。",             sentenceEn: "I like mackerel simmered in miso." },
+      { jp: "さんま",en: "Mackerel Pike",      romaji: "sanma",  wikiTitle: "Pacific saury",
+        sentence: "さんまは秋が旬です。",                sentenceEn: "Mackerel pike is in season in autumn." },
+      { jp: "さけ",  en: "Salmon",            romaji: "sake",   wikiTitle: "Salmon",
+        sentence: "さけのお寿司を食べました。",           sentenceEn: "I ate salmon sushi." },
+      { jp: "まぐろ",en: "Tuna",              romaji: "maguro", wikiTitle: "Tuna",
+        sentence: "まぐろは寿司の定番です。",             sentenceEn: "Tuna is a classic sushi topping." },
+      { jp: "たい",  en: "Sea Bream",         romaji: "tai",    wikiTitle: "Sea bream",
+        sentence: "たいはお祝いの料理によく使います。",   sentenceEn: "Sea bream is often used in celebratory dishes." },
+      { jp: "たら",  en: "Cod",               romaji: "tara",   wikiTitle: "Cod",
+        sentence: "たらは鍋料理に合います。",             sentenceEn: "Cod goes well in hot pot." },
+      { jp: "えび",  en: "Shrimp",            romaji: "ebi",    wikiTitle: "Shrimp",
+        sentence: "えびのてんぷらが大好きです。",         sentenceEn: "I love shrimp tempura." },
+      { jp: "かに",  en: "Crab",              romaji: "kani",   wikiTitle: "Crab",
+        sentence: "かには高いですが、おいしいです。",     sentenceEn: "Crab is expensive, but delicious." },
+      { jp: "いか",  en: "Squid",             romaji: "ika",    wikiTitle: "Squid",
+        sentence: "いかの刺身を食べましょう。",           sentenceEn: "Let us eat squid sashimi." },
+      { jp: "たこ",  en: "Octopus",           romaji: "tako",   wikiTitle: "Octopus",
+        sentence: "たこ焼きにはたこが入っています。",     sentenceEn: "Takoyaki has octopus inside." },
+      { jp: "かい",  en: "Shellfish",         romaji: "kai",    wikiTitle: "Shellfish",
+        sentence: "かいは海の近くでとれます。",           sentenceEn: "Shellfish are caught near the sea." },
+    ],
+
+    "🍚 Other": [
+      { jp: "こめ",   en: "Rice",  romaji: "kome",   wikiTitle: "Rice",
+        sentence: "日本ではこめがよく食べられます。", sentenceEn: "Rice is commonly eaten in Japan." },
+      { jp: "たまご", en: "Egg",   romaji: "tamago", wikiTitle: "Egg as food",
+        sentence: "毎朝たまごを一つ食べます。",     sentenceEn: "I eat one egg every morning." },
+    ],
+  },
+};
+
+export default lesson1;
