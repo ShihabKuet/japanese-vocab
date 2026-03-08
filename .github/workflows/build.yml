@@ -27,15 +27,12 @@ name: Build & Release
 
 on:
   push:
-    branches: [master]
+    branches: [main]
   workflow_dispatch:   # also allows manual trigger from GitHub UI
 
 env:
   NODE_VERSION: '20'
   JAVA_VERSION: '17'
-
-permissions:
-  contents: write
 
 jobs:
   # ─────────────────────────────────────────────────────────────
@@ -105,7 +102,10 @@ jobs:
         run: npm ci
 
       - name: Sync Capacitor (copy web assets → android/app/src/main/assets)
-        run: npx @capacitor/cli sync android
+        run: npx cap sync android
+        env:
+          ANDROID_HOME: /usr/local/lib/android/sdk
+          ANDROID_SDK_ROOT: /usr/local/lib/android/sdk
 
       - name: Grant gradlew execute permission
         run: chmod +x android/gradlew
@@ -113,8 +113,7 @@ jobs:
       - name: Build release APK
         run: cd android && ./gradlew assembleRelease --no-daemon
         env:
-          ANDROID_HOME: /usr/local/lib/android/sdk
-          ANDROID_SDK_ROOT: /usr/local/lib/android/sdk
+          ANDROID_HOME: ${{ env.ANDROID_HOME }}
 
       - name: Sign release APK
         id: sign_apk
