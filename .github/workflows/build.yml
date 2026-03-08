@@ -113,10 +113,18 @@ jobs:
       - name: Grant gradlew execute permission
         run: chmod +x android/gradlew
 
-      - name: Install Android SDK 35 (required by Capacitor v7)
+      - name: Install Android SDK 35 and patch build files
         run: |
           echo "sdk.dir=/usr/local/lib/android/sdk" > android/local.properties
           yes | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager "platforms;android-35" "build-tools;35.0.0" --sdk_root=$ANDROID_HOME
+          sed -i 's/compileSdkVersion 34/compileSdkVersion 35/g' android/app/build.gradle
+          sed -i 's/compileSdk = 34/compileSdk = 35/g'           android/app/build.gradle
+          sed -i 's/targetSdkVersion 34/targetSdkVersion 35/g'   android/app/build.gradle
+          sed -i 's/targetSdk = 34/targetSdk = 35/g'             android/app/build.gradle
+          sed -i 's/compileSdkVersion 33/compileSdkVersion 35/g' android/app/build.gradle
+          sed -i 's/targetSdkVersion 33/targetSdkVersion 35/g'   android/app/build.gradle
+          echo "--- android/app/build.gradle (sdk lines) ---"
+          grep -E "compileSdk|targetSdk|buildTools" android/app/build.gradle
         env:
           ANDROID_HOME: /usr/local/lib/android/sdk
           ANDROID_SDK_ROOT: /usr/local/lib/android/sdk
