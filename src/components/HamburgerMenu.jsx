@@ -216,19 +216,17 @@ export default function HamburgerMenu() {
         @keyframes hmFadeIn    { from { opacity:0; } to { opacity:1; } }
       `}</style>
 
-      {/* ── Hamburger button (always top-right) ── */}
+      {/* ── Hamburger button (inline inside TopBar) ── */}
       <button
         ref={btnRef}
         onClick={() => setOpen(o => !o)}
         aria-label="Menu"
         style={{
-          position:   'fixed',
-          top:        12,
-          right:      14,
+          position:   'relative',
           zIndex:     10000,
-          width:      42,
-          height:     42,
-          borderRadius: 12,
+          width:      40,
+          height:     40,
+          borderRadius: 10,
           border:     '2px solid rgba(181,52,26,0.25)',
           background: open ? '#b5341a' : 'rgba(255,248,240,0.95)',
           cursor:     'pointer',
@@ -237,9 +235,9 @@ export default function HamburgerMenu() {
           alignItems: 'center',
           justifyContent: 'center',
           gap:        5,
-          boxShadow:  '0 2px 12px rgba(181,52,26,0.18)',
+          boxShadow:  '0 2px 8px rgba(181,52,26,0.15)',
           transition: 'all 0.2s',
-          backdropFilter: 'blur(6px)',
+          flexShrink: 0,
         }}>
         {/* Three bar lines — animate to X when open */}
         {[0, 1, 2].map(i => (

@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { shuffle } from "../utils/shuffle";
 import { speak }   from "../utils/speech";
+import TopBar    from "./TopBar";
 
 /**
  * FlashcardPage
@@ -167,12 +168,23 @@ export default function FlashcardPage({ initialCards, showRomaji, onBack }) {
     setTimeout(() => setSpeaking(false), 1200);
   };
 
+  const shuffleBtn = (
+    <button
+      onClick={() => { setCards(shuffle(cards)); setCardIndex(0); setFlipped(false); }}
+      style={{ background: 'white', border: '2px solid #b5341a', color: '#b5341a', borderRadius: 8, padding: '6px 10px', cursor: 'pointer', fontFamily: 'Georgia, serif', fontSize: 12, whiteSpace: 'nowrap' }}>
+      🔀 Shuffle
+    </button>
+  );
+
   return (
     <div style={{
       minHeight: "100vh",
       background: "linear-gradient(135deg,#fef3e2,#fde8cc)",
       fontFamily: "Georgia, serif",
-      padding: 20,
+      paddingTop: "calc(52px + env(safe-area-inset-top, 0px))",
+      paddingBottom: 24,
+      paddingLeft: 16,
+      paddingRight: 16,
       display: "flex", flexDirection: "column", alignItems: "center",
     }}>
       <style>{`
@@ -183,20 +195,14 @@ export default function FlashcardPage({ initialCards, showRomaji, onBack }) {
         }
       `}</style>
 
-      <div style={{ width: "100%", maxWidth: 520 }}>
+      <TopBar
+        title="Flashcards"
+        subtitle={`${cardIndex + 1} / ${cards.length}`}
+        onBack={onBack}
+        rightSlot={shuffleBtn}
+      />
 
-        {/* ── Top bar ── */}
-        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 20 }}>
-          <button onClick={onBack}
-            style={{ background: "#b5341a", color: "white", border: "none", borderRadius: 10, padding: "8px 16px", cursor: "pointer", fontFamily: "Georgia, serif" }}>
-            ← Menu
-          </button>
-          <span style={{ color: "#7a4a2a", fontSize: 14 }}>{cardIndex + 1} / {cards.length}</span>
-          <button onClick={() => { setCards(shuffle(cards)); setCardIndex(0); setFlipped(false); }}
-            style={{ background: "white", border: "2px solid #b5341a", color: "#b5341a", borderRadius: 10, padding: "6px 14px", cursor: "pointer", fontFamily: "Georgia, serif", fontSize: 12 }}>
-            🔀 Shuffle
-          </button>
-        </div>
+      <div style={{ width: "100%", maxWidth: 520, marginTop: 12 }}>
 
         {/* ── Progress bar ── */}
         <div style={{ height: 6, background: "#e8cdb8", borderRadius: 3, marginBottom: 24, overflow: "hidden" }}>

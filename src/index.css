@@ -4,7 +4,33 @@
   padding: 0;
 }
 
-html, body, #root {
+html {
+  /* Let the app fill the whole screen including behind status bar */
+  height: 100%;
+}
+
+body {
   width: 100%;
   min-height: 100vh;
+  /* Android: prevent text size adjustment on orientation change */
+  -webkit-text-size-adjust: 100%;
+  /* Prevent content from being hidden behind Android navigation bar */
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+  overscroll-behavior: none;
+}
+
+#root {
+  width: 100%;
+  min-height: 100vh;
+}
+
+/* Prevent tap highlight flicker on Android */
+button, a {
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+/* Smooth scrolling */
+* {
+  scroll-behavior: smooth;
 }
