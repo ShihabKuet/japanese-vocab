@@ -113,8 +113,13 @@ jobs:
       - name: Grant gradlew execute permission
         run: chmod +x android/gradlew
 
-      - name: Fix local.properties SDK path
-        run: echo "sdk.dir=/usr/local/lib/android/sdk" > android/local.properties
+      - name: Install Android SDK 35 (required by Capacitor v7)
+        run: |
+          echo "sdk.dir=/usr/local/lib/android/sdk" > android/local.properties
+          yes | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager "platforms;android-35" "build-tools;35.0.0" --sdk_root=$ANDROID_HOME
+        env:
+          ANDROID_HOME: /usr/local/lib/android/sdk
+          ANDROID_SDK_ROOT: /usr/local/lib/android/sdk
 
       - name: Build release APK
         run: cd android && ./gradlew assembleRelease --no-daemon
@@ -132,7 +137,7 @@ jobs:
           keyStorePassword: ${{ secrets.STORE_PASSWORD }}
           keyPassword:      ${{ secrets.KEY_PASSWORD }}
         env:
-          BUILD_TOOLS_VERSION: '34.0.0'
+          BUILD_TOOLS_VERSION: '35.0.0'
 
       - name: Rename APK to friendly name
         run: |
