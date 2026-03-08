@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { shuffle } from "../utils/shuffle";
-import TopBar from "./TopBar";
 
 /**
  * QuizPage
@@ -83,27 +82,31 @@ export default function QuizPage({ initialWords, allWords, showRomaji, onBack })
   }
 
   /* ── Question screen ── */
-  const dirBtn = (
-    <button
-      onClick={() => setDirection(d => d === "jp→en" ? "en→jp" : "jp→en")}
-      style={{ background: 'white', border: '2px solid #b5341a', color: '#b5341a', borderRadius: 8, padding: '6px 10px', cursor: 'pointer', fontFamily: 'Georgia, serif', fontSize: 11, whiteSpace: 'nowrap' }}>
-      {direction}
-    </button>
-  );
-
   return (
     <div style={{ minHeight: "100vh", background: "linear-gradient(135deg,#fef3e2,#fde8cc)", fontFamily: "Georgia, serif",
-      paddingTop: "calc(52px + env(safe-area-inset-top, 0px))",
-      paddingBottom: 24, paddingLeft: 16, paddingRight: 16 }}>
+      padding: "16px 16px 24px",
+      paddingTop: "calc(16px + env(safe-area-inset-top, 0px))" }}>
 
-      <TopBar
-        title="Quiz"
-        subtitle={`Q${index + 1}/${words.length} • Score: ${score}`}
-        onBack={onBack}
-        rightSlot={dirBtn}
-      />
+      <div style={{ maxWidth: 500, margin: "0 auto" }}>
 
-      <div style={{ maxWidth: 500, margin: "0 auto", paddingTop: 12 }}>
+        {/* ── Top bar — paddingRight clears the fixed hamburger ── */}
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 16, paddingRight: 56 }}>
+          <button onClick={onBack} style={{
+            background: "#b5341a", color: "white", border: "none",
+            borderRadius: 10, padding: "10px 16px",
+            cursor: "pointer", fontFamily: "Georgia, serif", fontSize: 14,
+          }}>
+            ← Back
+          </button>
+          <span style={{ color: "#7a4a2a", fontSize: 13 }}>Q{index + 1}/{words.length} • Score: {score}</span>
+          <button onClick={() => setDirection(d => d === "jp→en" ? "en→jp" : "jp→en")} style={{
+            background: "white", border: "2px solid #b5341a", color: "#b5341a",
+            borderRadius: 10, padding: "8px 10px",
+            cursor: "pointer", fontFamily: "Georgia, serif", fontSize: 11,
+          }}>
+            {direction}
+          </button>
+        </div>
 
         {/* ── Progress bar ── */}
         <div style={{ height: 6, background: "#e8cdb8", borderRadius: 3, marginBottom: 24, overflow: "hidden" }}>
