@@ -15,7 +15,7 @@ export default function LessonSelector({ lessons, onSelect }) {
 
         {/* ── Header ── */}
         <div style={{ textAlign: "center", paddingTop: 40, paddingBottom: 30 }}>
-          <div style={{ fontSize: 52, marginBottom: 8 }}>MINNA NO NIHONGO</div>
+          <div style={{ fontSize: 52, marginBottom: 8 }}>🇯🇵</div>
           <h1 style={{ fontSize: 32, fontWeight: "bold", color: "#b5341a", margin: 0, letterSpacing: 2 }}>
             Japanese Vocabulary N5
           </h1>

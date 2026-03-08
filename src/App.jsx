@@ -5,6 +5,7 @@ import { lessons }          from './data/index';
 import { shuffle }          from './utils/shuffle';
 
 import UpdateChecker    from './components/UpdateChecker';
+import HamburgerMenu    from './components/HamburgerMenu';
 import LessonSelector   from './components/LessonSelector';
 import MenuPage         from './components/MenuPage';
 import BrowsePage       from './components/BrowsePage';
@@ -129,6 +130,9 @@ export default function App() {
         swUpdate={needRefresh}
         onSwReload={() => updateServiceWorker(true)}
       />
+
+      {/* ── Hamburger menu (always top-right on every screen) ── */}
+      <HamburgerMenu />
 
       {/* ── Main app content ── */}
       {renderScreen()}
