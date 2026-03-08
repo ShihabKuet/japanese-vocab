@@ -3,22 +3,19 @@
   "appName": "Japanese Vocab",
   "webDir":  "dist",
 
-  "server": {
-    "androidScheme": "https"
-  },
-
   "android": {
     "allowMixedContent": true,
-    "backgroundColor":   "#fef3e2"
+    "backgroundColor":   "#fef3e2",
+    "androidScheme":     "https"
   },
 
   "plugins": {
     "SplashScreen": {
-      "launchShowDuration":  2000,
-      "backgroundColor":     "#fef3e2",
+      "launchShowDuration":     2000,
+      "backgroundColor":        "#fef3e2",
       "androidSplashResourceName": "splash",
-      "showSpinner":         false,
-      "launchFadeOutDuration": 500
+      "showSpinner":            false,
+      "launchFadeOutDuration":  500
     }
   }
 }
