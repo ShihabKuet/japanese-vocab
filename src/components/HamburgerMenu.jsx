@@ -77,6 +77,23 @@ export default function HamburgerMenu() {
   const [checkState,  setCheckState]  = useState('idle');
   // checkState: 'idle' | 'checking' | 'up_to_date' | 'available' | 'error'
   const [updateInfo,  setUpdateInfo]  = useState(null); // { version, apkUrl }
+  const [isNativeApp,  setIsNativeApp]  = useState(false);
+
+  // Detect native Android on mount
+  useEffect(() => {
+    import('@capacitor/core').then(({ Capacitor }) => {
+      setIsNativeApp(Capacitor.isNativePlatform());
+    }).catch(() => {});
+  }, []);
+
+  const handleQuit = async () => {
+    try {
+      const { App } = await import('@capacitor/app');
+      await App.exitApp();
+    } catch (e) {
+      console.warn('exitApp not available', e);
+    }
+  };
   const panelRef  = useRef(null);
   const btnRef    = useRef(null);
 
@@ -323,6 +340,22 @@ export default function HamburgerMenu() {
 
             {/* ── Update checker ── */}
             {renderUpdateSection()}
+
+            <Divider />
+
+            {/* ── Quit App (Android only) ── */}
+            {isNativeApp && (
+              <>
+                <Divider />
+                <MenuItem
+                  icon="🚪"
+                  label="Quit App"
+                  sublabel="Close the application"
+                  onClick={handleQuit}
+                  accent="#c0392b"
+                />
+              </>
+            )}
 
             <Divider />
 
