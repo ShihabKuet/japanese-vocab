@@ -31,14 +31,14 @@
 
 import lesson1 from "./lesson1_food";
 import lesson2 from "./lesson2_department_store";
-// import lesson3 from "./lesson3_greetings";      ← paste next lesson here
+import lesson3 from "./lesson3_family";
 // import lesson4 from "./lesson4_transport";
 // import lesson5 from "./lesson5_weather";
 
 export const lessons = [
   lesson1,
   lesson2,
-  // lesson3,   ← and add it here
+  lesson3,
   // lesson4,
   // lesson5,
 ];

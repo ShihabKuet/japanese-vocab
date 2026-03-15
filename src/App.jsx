@@ -11,6 +11,7 @@ import MenuPage         from './components/MenuPage';
 import BrowsePage       from './components/BrowsePage';
 import FlashcardPage    from './components/FlashcardPage';
 import QuizPage         from './components/QuizPage';
+import StoryPage        from './components/StoryPage';
 
 /**
  * App — top-level router
@@ -82,6 +83,7 @@ export default function App() {
           showRomaji={showRomaji}
           setShowRomaji={setShowRomaji}
           getWords={getWords}
+          onStory={lesson?.story ? () => setScreen('story') : null}
           onBrowse={()     => setScreen('browse')}
           onFlashcards={()  => setScreen('flashcard')}
           onQuiz={()        => setScreen('quiz')}
@@ -106,6 +108,15 @@ export default function App() {
         <FlashcardPage
           initialCards={shuffle(getWords())}
           showRomaji={showRomaji}
+          onBack={() => setScreen('menu')}
+        />
+      );
+    }
+
+    if (screen === 'story') {
+      return (
+        <StoryPage
+          lesson={lesson}
           onBack={() => setScreen('menu')}
         />
       );

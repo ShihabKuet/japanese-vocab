@@ -1,7 +1,7 @@
 export default function MenuPage({
   lesson, allWords, selectedCategory, setSelectedCategory,
   showRomaji, setShowRomaji, getWords,
-  onBrowse, onFlashcards, onQuiz, onHome,
+  onBrowse, onFlashcards, onQuiz, onStory, onHome,
 }) {
   const categories = ["All", ...Object.keys(lesson.vocab)];
 
@@ -85,7 +85,7 @@ export default function MenuPage({
         </div>
 
         {/* ── Mode buttons ── */}
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 12, marginBottom: 16 }}>
+        <div style={{ display: "grid", gridTemplateColumns: onStory ? "1fr 1fr" : "1fr 1fr 1fr", gap: 12, marginBottom: 12 }}>
           {[
             { label: "Browse",     icon: "📖", desc: "Audio + examples", action: onBrowse },
             { label: "Flashcards", icon: "🃏", desc: "Flip & memorize",  action: onFlashcards },
@@ -102,6 +102,28 @@ export default function MenuPage({
             </button>
           ))}
         </div>
+
+        {/* ── Story mode button — only shown when lesson has a story ── */}
+        {onStory && (
+          <button onClick={onStory} style={{
+            width: "100%",
+            background: "linear-gradient(135deg,#b5341a,#d4502a)",
+            border: "none", borderRadius: 16, padding: "18px 20px",
+            cursor: "pointer", textAlign: "left", marginBottom: 16,
+            display: "flex", alignItems: "center", gap: 16,
+            boxShadow: "0 4px 20px rgba(181,52,26,0.25)",
+            fontFamily: "Georgia, serif",
+          }}>
+            <div style={{ fontSize: 36 }}>💬</div>
+            <div style={{ flex: 1 }}>
+              <div style={{ fontWeight: "bold", color: "white", fontSize: 16 }}>Story Mode</div>
+              <div style={{ color: "rgba(255,255,255,0.8)", fontSize: 12, marginTop: 2 }}>
+                Learn through conversation • 会話で学ぶ
+              </div>
+            </div>
+            <div style={{ color: "rgba(255,255,255,0.6)", fontSize: 22 }}>→</div>
+          </button>
+        )}
 
         <p style={{ textAlign: "center", color: "#b5341a", fontSize: 12, opacity: 0.7 }}>
           がんばって！ Ganbatte! (Good luck!)
